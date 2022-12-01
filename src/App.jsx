@@ -8,6 +8,7 @@ import DailyCard from "./components/DailyCard";
 import HighlightCard from "./components/HighlightCard";
 import HighlightWrapper from "./components/HighlightWrapper";
 import WeatherCard from "./components/WeatherCard";
+import "./components/mystyle.css";
 
 export default function App() {
   const [weather, setWeather] = useState({});
@@ -39,17 +40,21 @@ export default function App() {
   const weeks = [8, 16, 24, 32, 39];
 
   return (
-    <>
-      <div className="container has-image-background">
+    <div className="has-image-background">
+      <div className="container">
         <form className="input-group mb-4" onSubmit={handleSubmit}>
           <input
             type="text"
-            className="form-control"
+            className="form-control rounded-xl"
             onChange={(e) => setQuery(e.target.value)}
             value={query}
             placeholder="Search City"
           />
-          <input type="submit" className="btn btn-primary" value="search" />
+          <input
+            type="submit"
+            className="btn btn-primary rounded-xl"
+            value="Search"
+          />
         </form>
       </div>
       {loading ? (
@@ -135,6 +140,6 @@ export default function App() {
           </RightSide>
         </WeatherCard>
       )}
-    </>
+    </div>
   );
 }

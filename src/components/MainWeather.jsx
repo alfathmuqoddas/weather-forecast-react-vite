@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const MainWeather = ({
   bigIcon,
@@ -24,8 +24,8 @@ const MainWeather = ({
         <p className="m-0">☂ Humidity - {humidity}%</p>
       </div>
       <h2
-        className="bg-primary text-light p-2"
-        style={{ borderRadius: '1rem' }}
+        className="bg-primary text-light md:ms-3 m-2 p-3"
+        style={{ borderRadius: "1rem" }}
       >
         {city}, {country}
       </h2>
