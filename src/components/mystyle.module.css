@@ -1,0 +1,10 @@
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+
+.has-image-background {
+  background: url("https://picsum.photos/id/16/3840/2160");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
