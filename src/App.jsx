@@ -20,11 +20,11 @@ export default function App() {
     const res = await fetch(url);
     const resJson = await res.json();
     console.log(resJson);
-    if (resJson) {
+    if (resJson.list) {
       setWeather(resJson);
       setLoading(false);
     } else {
-      return <>ERROR</>;
+      alert("Failed to fetch data");
     }
   };
 
