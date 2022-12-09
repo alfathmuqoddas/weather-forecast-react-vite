@@ -122,7 +122,7 @@ export default function App() {
               <HighlightCard
                 title="Winds Speed 🪁"
                 body={weather.list[2].wind.speed.toFixed(0) * 3.6}
-                unit="KH/h"
+                unit="KM/h"
               />
 
               <HighlightCard
