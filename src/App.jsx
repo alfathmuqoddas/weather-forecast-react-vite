@@ -123,9 +123,9 @@ export default function App() {
                 <p>Winds Speed 🪁</p>
                 <div>
                   <span className="display-3">
-                    {weather.list[2].wind.speed}
+                    {weather.list[2].wind.speed * 3.6}
                   </span>{" "}
-                  M/S
+                  KM/h
                 </div>
               </HighlightCard>
 
