@@ -39,6 +39,14 @@ export default function App() {
 
   const weeks = [8, 16, 24, 32, 39];
 
+  const getSunrise = (sunrise, timezone) => {
+    return moment.utc(sunrise, "X").add(timezone, "seconds").format("HH:mm");
+  };
+
+  const getSunset = (sunset, timezone) => {
+    return moment.utc(sunset, "X").add(timezone, "seconds").format("HH:mm");
+  };
+
   return (
     <div className="has-image-background">
       <div className="container">
@@ -92,13 +100,17 @@ export default function App() {
             Today's Highlight
             <HighlightWrapper>
               <HighlightCard>
-                <p>Sunrise & Sunset</p>
-                <h4>🌄 {moment.unix(weather.city.sunrise).format("HH.mm")}</h4>
-                <h4>🌇 {moment.unix(weather.city.sunset).format("HH.mm")}</h4>
+                <p>Sunrise & Sunset ⛅</p>
+                <h4>
+                  🌄 {getSunrise(weather.city.sunrise, weather.city.timezone)}
+                </h4>
+                <h4>
+                  🌇 {getSunset(weather.city.sunset, weather.city.timezone)}
+                </h4>
               </HighlightCard>
 
               <HighlightCard>
-                <p>Humidity</p>
+                <p>Humidity 💧</p>
                 <div>
                   <span className="display-3">
                     {weather.list[2].main.humidity}
@@ -108,7 +120,7 @@ export default function App() {
               </HighlightCard>
 
               <HighlightCard>
-                <p>Winds Speed</p>
+                <p>Winds Speed 🪁</p>
                 <div>
                   <span className="display-3">
                     {weather.list[2].wind.speed}
@@ -118,7 +130,7 @@ export default function App() {
               </HighlightCard>
 
               <HighlightCard>
-                <p>Pressure</p>
+                <p>Pressure 🌊</p>
                 <div>
                   <span className="display-3">
                     {weather.list[2].main.pressure}
@@ -128,7 +140,7 @@ export default function App() {
               </HighlightCard>
 
               <HighlightCard>
-                <p>Visibility</p>
+                <p>Visibility 🕶</p>
                 <div>
                   <span className="display-3">
                     {weather.list[2].visibility / 1000}
