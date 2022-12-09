@@ -99,55 +99,43 @@ export default function App() {
             </div>
             Today's Highlight
             <HighlightWrapper>
-              <HighlightCard>
-                <p>Sunrise & Sunset ⛅</p>
-                <h4>
-                  🌄 {getSunrise(weather.city.sunrise, weather.city.timezone)}
-                </h4>
-                <h4>
-                  🌇 {getSunset(weather.city.sunset, weather.city.timezone)}
-                </h4>
-              </HighlightCard>
+              <HighlightCard
+                title="Sunrise & Sunset ⛅"
+                body2={
+                  <h4>
+                    🌄 {getSunrise(weather.city.sunrise, weather.city.timezone)}
+                  </h4>
+                }
+                body3={
+                  <h4>
+                    🌇 {getSunset(weather.city.sunset, weather.city.timezone)}
+                  </h4>
+                }
+              />
 
-              <HighlightCard>
-                <p>Humidity 💧</p>
-                <div>
-                  <span className="display-3">
-                    {weather.list[2].main.humidity}
-                  </span>
-                  %
-                </div>
-              </HighlightCard>
+              <HighlightCard
+                title="Humidity 💧"
+                body={weather.list[2].main.humidity}
+                unit="%"
+              />
 
-              <HighlightCard>
-                <p>Winds Speed 🪁</p>
-                <div>
-                  <span className="display-3">
-                    {weather.list[2].wind.speed * 3.6}
-                  </span>{" "}
-                  KM/h
-                </div>
-              </HighlightCard>
+              <HighlightCard
+                title="Winds Speed 🪁"
+                body={weather.list[2].wind.speed.toFixed(0) * 3.6}
+                unit="KH/h"
+              />
 
-              <HighlightCard>
-                <p>Pressure 🌊</p>
-                <div>
-                  <span className="display-3">
-                    {weather.list[2].main.pressure}
-                  </span>{" "}
-                  hPa
-                </div>
-              </HighlightCard>
+              <HighlightCard
+                title="Pressure 🌊"
+                body={weather.list[2].main.pressure}
+                unit="hPa"
+              />
 
-              <HighlightCard>
-                <p>Visibility 🕶</p>
-                <div>
-                  <span className="display-3">
-                    {weather.list[2].visibility / 1000}
-                  </span>{" "}
-                  KM
-                </div>
-              </HighlightCard>
+              <HighlightCard
+                title="Visibility 🕶"
+                body={weather.list[2].visibility / 1000}
+                unit="KM"
+              />
             </HighlightWrapper>
           </RightSide>
         </WeatherCard>
