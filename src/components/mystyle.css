@@ -3,7 +3,7 @@
 }
 
 .has-image-background {
-  background: url("https://picsum.photos/id/235/3840/2160");
+  background: url("https://picsum.photos/id/235/1920/1080");
   background-size: cover;
   background-repeat: repeat;
   background-attachment: fixed;
