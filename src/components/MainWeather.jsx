@@ -14,7 +14,11 @@ const MainWeather = ({
 }) => {
   return (
     <div className="w-100 text-center">
-      <img src={`https://openweathermap.org/img/wn/${bigIcon}@4x.png`} />
+      <img
+        src={`https://openweathermap.org/img/wn/${bigIcon}@4x.png`}
+        width="200"
+        height="200"
+      />
       <div className="m-0 display-3">{mainTemp} °C</div>
       <div className="display-6">{mainDesc}</div>
       <div className="my-4">

@@ -8,7 +8,11 @@ const DailyCard = ({ day, temp, feels, icon }) => {
         style={{ borderRadius: "1rem" }}
       >
         <p>{day}</p>
-        <img src={`https://openweathermap.org/img/wn/${icon}.png`} />
+        <img
+          src={`https://openweathermap.org/img/wn/${icon}.png`}
+          width="50"
+          height="50"
+        />
         <p>
           {temp}° {feels}°
         </p>
