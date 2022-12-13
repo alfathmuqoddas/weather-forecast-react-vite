@@ -12,6 +12,7 @@ const DailyCard = ({ day, temp, feels, icon }) => {
           src={`https://openweathermap.org/img/wn/${icon}.png`}
           width="50"
           height="50"
+          alt="daily-weather-icon"
         />
         <p>
           {temp}° {feels}°
