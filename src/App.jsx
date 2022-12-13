@@ -24,7 +24,7 @@ export default function App() {
       setWeather(resJson);
       setLoading(false);
     } else {
-      alert("Failed to fetch data");
+      alert("The city you looking is not exist!");
     }
   };
 
@@ -57,17 +57,18 @@ export default function App() {
             onChange={(e) => setQuery(e.target.value)}
             value={query}
             placeholder="Search City"
+            required
           />
           <input
             type="submit"
             className="btn btn-primary rounded-xl"
-            value="Search"
+            value="🔍"
           />
         </form>
       </div>
       {loading ? (
         <div className="container">
-          <h1>Search For City</h1>
+          <h1 className="text-light">Loading...</h1>
         </div>
       ) : (
         <WeatherCard>
@@ -85,8 +86,7 @@ export default function App() {
             />
           </LeftSide>
           <RightSide>
-            Daily Forecast
-            <div className="row row-cols-2 row-cols-md-5 text-dark g-2 my-2">
+            <div className="row row-cols-2 row-cols-md-5 text-dark g-2 pb-4">
               {weeks.map((week, index) => (
                 <DailyCard
                   key={index}
@@ -97,7 +97,6 @@ export default function App() {
                 />
               ))}
             </div>
-            Today's Highlight
             <HighlightWrapper>
               <HighlightCard
                 title="Sunrise & Sunset ⛅"
@@ -120,7 +119,7 @@ export default function App() {
               />
 
               <HighlightCard
-                title="Winds Speed 🪁"
+                title="Wind Speed 🪁"
                 body={weather.list[2].wind.speed.toFixed(0) * 3.6}
                 unit="KM/h"
               />
@@ -135,6 +134,20 @@ export default function App() {
                 title="Visibility 🕶"
                 body={weather.list[2].visibility / 1000}
                 unit="KM"
+              />
+              <HighlightCard
+                title="API From 🗺"
+                body2={
+                  <h4 className="">
+                    <a
+                      href="https://openweathermap.org"
+                      target="_blank"
+                      className="text-decoration-none"
+                    >
+                      OpenWeatherMap
+                    </a>
+                  </h4>
+                }
               />
             </HighlightWrapper>
           </RightSide>

@@ -21,7 +21,7 @@ const MainWeather = ({
         <p className="m-0">🌡 Feels Like {feels} °C</p>
         <p className="m-0">⛄ Min {min} °C</p>
         <p className="m-0">☀ Max {max} °C</p>
-        <p className="m-0">☂ Humidity - {humidity}%</p>
+        <p className="m-0">☂ Humidity {humidity}%</p>
       </div>
       <h2
         className="bg-primary text-light md:ms-3 m-2 p-3"
