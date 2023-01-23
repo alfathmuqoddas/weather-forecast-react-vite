@@ -6,7 +6,7 @@ const WeatherCard = ({ children }) => {
     <div className="container">
       <div
         className="card blur-effect mt-md-3"
-        style={{ borderRadius: "1rem" }}
+        style={{ borderRadius: "2rem" }}
       >
         <div className="row g-0">{children}</div>
       </div>
