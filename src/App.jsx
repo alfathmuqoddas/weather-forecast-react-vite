@@ -14,6 +14,21 @@ export default function App() {
   const [weather, setWeather] = useState({});
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("Jakarta");
+  const [backgroundImageUrl, setBackgroundImageUrl] = useState(
+    `https://picsum.photos/seed/${generateRandomString()}/1280/720`
+  );
+
+  function generateRandomString() {
+    // Generate a random string of 10 characters
+    const result = Math.random().toString(36).slice(2, 7);
+    return result;
+  }
+
+  function handleRandomizeClick() {
+    setBackgroundImageUrl(
+      `https://picsum.photos/seed/${generateRandomString()}/1280/720`
+    );
+  }
 
   const getWeather = async () => {
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=4018b500122ee53a2b2b0ccc505a5ae4&units=metric`;
@@ -48,7 +63,15 @@ export default function App() {
   };
 
   return (
-    <div className="has-image-background">
+    <div
+      style={{
+        backgroundImage: `url(${backgroundImageUrl})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+      }}
+    >
       <div className="container">
         <form className="input-group mb-4" onSubmit={handleSubmit}>
           <input
@@ -138,7 +161,7 @@ export default function App() {
               <HighlightCard
                 title="API From 🗺"
                 body2={
-                  <h4 className="">
+                  <div className="">
                     <a
                       href="https://openweathermap.org"
                       target="_blank"
@@ -146,7 +169,13 @@ export default function App() {
                     >
                       OpenWeatherMap
                     </a>
-                  </h4>
+                    <button
+                      className="btn btn-primary"
+                      onClick={handleRandomizeClick}
+                    >
+                      Randomize Background
+                    </button>
+                  </div>
                 }
               />
             </HighlightWrapper>
