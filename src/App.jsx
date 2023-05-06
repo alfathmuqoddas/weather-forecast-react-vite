@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-//import Moment from "react-moment";
-import moment from "moment";
 import MainWeather from "./components/MainWeather";
 import LeftSide from "./components/LeftSide";
 import RightSide from "./components/RightSide";
@@ -9,9 +7,12 @@ import HighlightCard from "./components/HighlightCard";
 import HighlightWrapper from "./components/HighlightWrapper";
 import WeatherCard from "./components/WeatherCard";
 import "./components/mystyle.css";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 
 export default function App() {
-  const [weather, setWeather] = useState({});
+  const [weather, setWeather] = useState([]);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("Jakarta");
   const [backgroundImageUrl, setBackgroundImageUrl] = useState(
@@ -30,36 +31,35 @@ export default function App() {
     );
   }
 
-  const getWeather = async () => {
-    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=4018b500122ee53a2b2b0ccc505a5ae4&units=metric`;
-    const res = await fetch(url);
-    const resJson = await res.json();
-    console.log(resJson);
-    if (resJson.list) {
-      setWeather(resJson);
-      setLoading(false);
-    } else {
-      alert("The city you looking is not exist!");
+  const getWeather = async (e) => {
+    e.preventDefault();
+    try {
+      const url = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=4018b500122ee53a2b2b0ccc505a5ae4&units=metric`;
+      const res = await fetch(url);
+      const resJson = await res.json();
+      console.log(resJson);
+      if (resJson.list) {
+        setWeather(resJson);
+        setLoading(false);
+      } else {
+        alert("City not exist");
+      }
+    } catch (error) {
+      alert(error);
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    getWeather();
-  };
-
-  useEffect(() => {
-    getWeather();
-  }, []);
-
   const weeks = [8, 16, 24, 32, 39];
 
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+
   const getSunrise = (sunrise, timezone) => {
-    return moment.utc(sunrise, "X").add(timezone, "seconds").format("HH:mm");
+    return dayjs.unix(sunrise).utc().add(timezone, "second").format("HH:mm");
   };
 
   const getSunset = (sunset, timezone) => {
-    return moment.utc(sunset, "X").add(timezone, "seconds").format("HH:mm");
+    return dayjs.unix(sunset).utc().add(timezone, "second").format("HH:mm");
   };
 
   return (
@@ -73,7 +73,7 @@ export default function App() {
       }}
     >
       <div className="container">
-        <form className="input-group mb-4" onSubmit={handleSubmit}>
+        <form className="input-group mb-4" onSubmit={getWeather}>
           <input
             type="text"
             className="form-control rounded-xl"
@@ -113,7 +113,7 @@ export default function App() {
               {weeks.map((week, index) => (
                 <DailyCard
                   key={index}
-                  day={moment.unix(weather.list[week].dt).format("ddd")}
+                  day={dayjs.unix(weather.list[week].dt).format("ddd")}
                   temp={weather.list[week].main.temp.toFixed(0)}
                   feels={weather.list[week].main.feels_like.toFixed(0)}
                   icon={weather.list[week].weather[0].icon}
