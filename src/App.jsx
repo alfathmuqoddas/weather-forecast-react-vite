@@ -170,7 +170,7 @@ export default function App() {
                       OpenWeatherMap
                     </a>
                     <button
-                      className="btn btn-primary"
+                      className="btn btn-primary btn-sm"
                       onClick={handleRandomizeClick}
                     >
                       Randomize Background
