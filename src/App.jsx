@@ -31,8 +31,11 @@ export default function App() {
     );
   }
 
-  const getWeather = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    getWeather();
+  }, []);
+
+  const getWeather = async () => {
     try {
       const url = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=4018b500122ee53a2b2b0ccc505a5ae4&units=metric`;
       const res = await fetch(url);
@@ -73,7 +76,13 @@ export default function App() {
       }}
     >
       <div className="container">
-        <form className="input-group mb-4" onSubmit={getWeather}>
+        <form
+          className="input-group mb-4"
+          onSubmit={(e) => {
+            e.preventDefault();
+            getWeather();
+          }}
+        >
           <input
             type="text"
             className="form-control rounded-xl"
