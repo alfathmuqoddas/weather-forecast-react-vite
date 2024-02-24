@@ -6,7 +6,7 @@ const HighlightCard = ({ title, body, unit, body2, body3 }) => {
       <div className="col">
         <div
           className="p-2 border bg-light text-center shadow-sm border-0"
-          style={{ minHeight: "150px", borderRadius: "1rem" }}
+          style={{ minHeight: "150px", borderRadius: "28px" }}
         >
           <p>{title}</p>
           <div>

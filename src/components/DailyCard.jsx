@@ -5,7 +5,7 @@ const DailyCard = ({ day, temp, feels, icon }) => {
     <div className="col">
       <div
         className="p-2 border bg-light text-center shadow-sm border-0"
-        style={{ borderRadius: "1rem" }}
+        style={{ borderRadius: "28px" }}
       >
         <p>{day}</p>
         <img

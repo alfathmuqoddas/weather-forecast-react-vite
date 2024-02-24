@@ -5,7 +5,7 @@ const RightSide = ({ children }) => {
     <div className="col-md-8 p-3">
       <div
         className="card-body h-100 bg-light text-light"
-        style={{ borderRadius: "1.5rem" }}
+        style={{ borderRadius: "28px" }}
       >
         <div className="">{children}</div>
       </div>

@@ -77,7 +77,8 @@ export default function App() {
     >
       <div className="container">
         <form
-          className="input-group mb-4"
+          className="input-group mb-4 pt-4"
+          style={{ width: "320px" }}
           onSubmit={(e) => {
             e.preventDefault();
             getWeather();
@@ -85,7 +86,7 @@ export default function App() {
         >
           <input
             type="text"
-            className="form-control rounded-xl"
+            className="form-control rounded-pill me-2"
             onChange={(e) => setQuery(e.target.value)}
             value={query}
             placeholder="Search City"
@@ -93,7 +94,7 @@ export default function App() {
           />
           <input
             type="submit"
-            className="btn btn-primary rounded-xl"
+            className="btn btn-primary rounded-pill"
             value="🔍"
           />
         </form>
@@ -179,7 +180,8 @@ export default function App() {
                       OpenWeatherMap
                     </a>
                     <button
-                      className="btn btn-primary"
+                      className="btn btn-primary mt-2 rounded-pill"
+                      style={{ borderRadius: "" }}
                       onClick={handleRandomizeClick}
                     >
                       Randomize Background

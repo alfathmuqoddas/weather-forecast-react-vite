@@ -30,7 +30,7 @@ const MainWeather = ({
       </div>
       <h2
         className="bg-primary text-light md:ms-3 m-2 p-3"
-        style={{ borderRadius: "1rem" }}
+        style={{ borderRadius: "999px" }}
       >
         {city}, {country}
       </h2>
