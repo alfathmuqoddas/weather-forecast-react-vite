@@ -4,10 +4,7 @@ import React from "react";
 const WeatherCard = ({ children }) => {
   return (
     <div className="container">
-      <div
-        className="card blur-effect mt-md-3"
-        style={{ borderRadius: "28px" }}
-      >
+      <div className="card blur-effect" style={{ borderRadius: "28px" }}>
         <div className="row g-0">{children}</div>
       </div>
     </div>

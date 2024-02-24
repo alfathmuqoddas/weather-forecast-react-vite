@@ -73,32 +73,9 @@ export default function App() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         minHeight: "100vh",
+        padding: "1rem",
       }}
     >
-      <div className="container">
-        <form
-          className="input-group mb-4 pt-4"
-          style={{ width: "320px" }}
-          onSubmit={(e) => {
-            e.preventDefault();
-            getWeather();
-          }}
-        >
-          <input
-            type="text"
-            className="form-control rounded-pill me-2"
-            onChange={(e) => setQuery(e.target.value)}
-            value={query}
-            placeholder="Search City"
-            required
-          />
-          <input
-            type="submit"
-            className="btn btn-primary rounded-pill"
-            value="🔍"
-          />
-        </form>
-      </div>
       {loading ? (
         <div className="container">
           <h1 className="text-light">Loading...</h1>
@@ -106,6 +83,30 @@ export default function App() {
       ) : (
         <WeatherCard>
           <LeftSide>
+            <div className="container mt-0">
+              <form
+                className="input-group p-2"
+                style={{ width: "100%" }}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  getWeather();
+                }}
+              >
+                <input
+                  type="text"
+                  className="form-control rounded-pill me-1"
+                  onChange={(e) => setQuery(e.target.value)}
+                  value={query}
+                  placeholder="Search City"
+                  required
+                />
+                <input
+                  type="submit"
+                  className="btn btn-primary rounded-pill"
+                  value="🔍"
+                />
+              </form>
+            </div>
             <MainWeather
               bigIcon={weather.list[2].weather[0].icon}
               mainTemp={weather.list[2].main.temp.toFixed(0)}
