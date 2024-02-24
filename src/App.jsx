@@ -94,16 +94,24 @@ export default function App() {
               >
                 <input
                   type="text"
-                  className="form-control rounded-pill me-1"
+                  className="form-control"
                   onChange={(e) => setQuery(e.target.value)}
                   value={query}
                   placeholder="Search City"
+                  style={{
+                    borderTopLeftRadius: "50rem",
+                    borderBottomLeftRadius: "50rem",
+                  }}
                   required
                 />
                 <input
                   type="submit"
-                  className="btn btn-primary rounded-pill"
+                  className="btn btn-primary px-3"
                   value="🔍"
+                  style={{
+                    borderTopRightRadius: "50rem",
+                    borderBottomRightRadius: "50rem",
+                  }}
                 />
               </form>
             </div>
@@ -182,7 +190,6 @@ export default function App() {
                     </a>
                     <button
                       className="btn btn-primary mt-2 rounded-pill"
-                      style={{ borderRadius: "" }}
                       onClick={handleRandomizeClick}
                     >
                       Randomize Background

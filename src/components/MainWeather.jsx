@@ -28,12 +28,9 @@ const MainWeather = ({
         <p className="m-0">☀ Max {max} °C</p>
         <p className="m-0">☂ Humidity {humidity}%</p>
       </div>
-      <h2
-        className="bg-primary text-light md:ms-3 m-2 p-3"
-        style={{ borderRadius: "999px" }}
-      >
-        {city}, {country}
-      </h2>
+      <div className="bg-primary text-light m-2 py-2 rounded-pill">
+        <h2>{`${city}, ${country}`}</h2>
+      </div>
     </div>
   );
 };
