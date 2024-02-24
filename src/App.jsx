@@ -74,6 +74,9 @@ export default function App() {
         backgroundPosition: "center",
         minHeight: "100vh",
         padding: "1rem",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       {loading ? (
@@ -85,7 +88,7 @@ export default function App() {
           <LeftSide>
             <div className="container mt-0">
               <form
-                className="input-group p-2"
+                className="input-group"
                 style={{ width: "100%" }}
                 onSubmit={(e) => {
                   e.preventDefault();

@@ -2,12 +2,12 @@ import React from "react";
 
 const RightSide = ({ children }) => {
   return (
-    <div className="col-md-8 p-3">
+    <div className="col-md-8">
       <div
-        className="card-body h-100 bg-light text-light"
+        className="card-body h-100 bg-light text-light p-4"
         style={{ borderRadius: "28px" }}
       >
-        <div className="">{children}</div>
+        {children}
       </div>
     </div>
   );
