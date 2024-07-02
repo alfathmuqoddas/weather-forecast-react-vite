@@ -13,13 +13,13 @@ import timezone from "dayjs/plugin/timezone";
 
 export default function App() {
   const [weather, setWeather] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState("Jakarta");
-  const [backgroundImageUrl, setBackgroundImageUrl] = useState(
+  const [loading, setLoading] = useState<boolean>(true);
+  const [query, setQuery] = useState<string>("Jakarta");
+  const [backgroundImageUrl, setBackgroundImageUrl] = useState<string>(
     `https://picsum.photos/seed/${generateRandomString()}/1280/720`
   );
 
-  function generateRandomString() {
+  function generateRandomString(): string {
     // Generate a random string of 10 characters
     const result = Math.random().toString(36).slice(2, 7);
     return result;
@@ -37,7 +37,7 @@ export default function App() {
 
   const getWeather = async () => {
     try {
-      const url = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=4018b500122ee53a2b2b0ccc505a5ae4&units=metric`;
+      const url: string = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=4018b500122ee53a2b2b0ccc505a5ae4&units=metric`;
       const res = await fetch(url);
       const resJson = await res.json();
       console.log(resJson);
@@ -57,11 +57,11 @@ export default function App() {
   dayjs.extend(utc);
   dayjs.extend(timezone);
 
-  const getSunrise = (sunrise, timezone) => {
+  const getSunrise = (sunrise: number, timezone: number) => {
     return dayjs.unix(sunrise).utc().add(timezone, "second").format("HH:mm");
   };
 
-  const getSunset = (sunset, timezone) => {
+  const getSunset = (sunset: number, timezone: number) => {
     return dayjs.unix(sunset).utc().add(timezone, "second").format("HH:mm");
   };
 
@@ -147,12 +147,13 @@ export default function App() {
                 title="Sunrise & Sunset ⛅"
                 body2={
                   <h4>
-                    🌄 {getSunrise(weather.city.sunrise, weather.city.timezone)}
+                    🌄{" "}
+                    {getSunrise(weather.city?.sunrise, weather.city?.timezone)}
                   </h4>
                 }
                 body3={
                   <h4>
-                    🌇 {getSunset(weather.city.sunset, weather.city.timezone)}
+                    🌇 {getSunset(weather.city?.sunset, weather.city?.timezone)}
                   </h4>
                 }
               />
