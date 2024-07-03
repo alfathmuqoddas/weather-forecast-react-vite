@@ -1,5 +1,4 @@
-import React from 'react';
-import Counter from '../function/Counter';
+import Counter from "../function/Counter";
 
 const CounterComponent = () => {
   const { increment, decrement, reset, counter } = Counter();

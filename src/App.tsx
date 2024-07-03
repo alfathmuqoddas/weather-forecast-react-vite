@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import MainWeather from "./components/MainWeather";
 import LeftSide from "./components/LeftSide";
 import RightSide from "./components/RightSide";
@@ -11,15 +11,65 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 
+interface IWeatherData {
+  city: ICityObjectData;
+  cnt: number;
+  cod: string;
+  list: IListWeatherObject[];
+  message: number;
+}
+
+interface ICityObjectData {
+  coord: { lat: number; lon: number };
+  country: string;
+  id: number;
+  name: string;
+  population: number;
+  sunrise: number;
+  sunset: number;
+  timezone: number;
+}
+
+interface IListWeatherObject {
+  clouds: { all: number };
+  dt: number;
+  dt_txt: string;
+  main: IMainWeather;
+  pop: number;
+  sys: { pod: string };
+  visibility: number;
+  weather: IWeatherInnerObject[];
+  wind: { speed: number; deg: number; gust: number };
+}
+
+interface IMainWeather {
+  feels_like: number;
+  grnd_level: number;
+  humidity: number;
+  pressure: number;
+  sea_level: number;
+  temp: number;
+  temp_kf: number;
+  temp_max: number;
+  temp_min: number;
+}
+
+interface IWeatherInnerObject {
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
+}
+
 export default function App() {
-  const [weather, setWeather] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState("Jakarta");
-  const [backgroundImageUrl, setBackgroundImageUrl] = useState(
+  const [weather, setWeather] = useState<IWeatherData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [query, setQuery] = useState<string>("Jakarta");
+  const [backgroundImageUrl, setBackgroundImageUrl] = useState<string>(
     `https://picsum.photos/seed/${generateRandomString()}/1280/720`
   );
 
-  function generateRandomString() {
+  function generateRandomString(): string {
     // Generate a random string of 10 characters
     const result = Math.random().toString(36).slice(2, 7);
     return result;
@@ -37,9 +87,9 @@ export default function App() {
 
   const getWeather = async () => {
     try {
-      const url = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=4018b500122ee53a2b2b0ccc505a5ae4&units=metric`;
+      const url: string = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=4018b500122ee53a2b2b0ccc505a5ae4&units=metric`;
       const res = await fetch(url);
-      const resJson = await res.json();
+      const resJson = (await res.json()) as IWeatherData;
       console.log(resJson);
       if (resJson.list) {
         setWeather(resJson);
@@ -52,16 +102,16 @@ export default function App() {
     }
   };
 
-  const weeks = [8, 16, 24, 32, 39];
+  const weeks: number[] = [8, 16, 24, 32, 39];
 
   dayjs.extend(utc);
   dayjs.extend(timezone);
 
-  const getSunrise = (sunrise, timezone) => {
+  const getSunrise = (sunrise: number, timezone: number) => {
     return dayjs.unix(sunrise).utc().add(timezone, "second").format("HH:mm");
   };
 
-  const getSunset = (sunset, timezone) => {
+  const getSunset = (sunset: number, timezone: number) => {
     return dayjs.unix(sunset).utc().add(timezone, "second").format("HH:mm");
   };
 
@@ -119,15 +169,16 @@ export default function App() {
               </form>
             </div>
             <MainWeather
-              bigIcon={weather.list[2].weather[0].icon}
-              mainTemp={weather.list[2].main.temp.toFixed(0)}
-              feels={weather.list[2].main.feels_like.toFixed(0)}
-              min={weather.list[2].main.temp_min.toFixed(0)}
-              max={weather.list[2].main.temp_max.toFixed(0)}
-              mainDesc={weather.list[2].weather[0].description}
-              humidity={weather.list[2].main.humidity}
-              city={weather.city.name}
-              country={weather.city.country}
+              mainDate=""
+              bigIcon={weather?.list[2].weather[0].icon || ""}
+              mainTemp={weather?.list[2].main.temp.toFixed(0) || ""}
+              feels={weather?.list[2].main.feels_like.toFixed(0) || ""}
+              min={weather?.list[2].main.temp_min.toFixed(0) || ""}
+              max={weather?.list[2].main.temp_max.toFixed(0) || ""}
+              mainDesc={weather?.list[2].weather[0].description || ""}
+              humidity={weather?.list[2].main.humidity || ""}
+              city={weather?.city.name || ""}
+              country={weather?.city.country || ""}
             />
           </LeftSide>
           <RightSide>
@@ -135,53 +186,78 @@ export default function App() {
               {weeks.map((week, index) => (
                 <DailyCard
                   key={index}
-                  day={dayjs.unix(weather.list[week].dt).format("ddd")}
-                  temp={weather.list[week].main.temp.toFixed(0)}
-                  feels={weather.list[week].main.feels_like.toFixed(0)}
-                  icon={weather.list[week].weather[0].icon}
+                  day={dayjs.unix(weather?.list[week]?.dt || 0).format("ddd")}
+                  temp={weather?.list[week].main.temp.toFixed(0) || ""}
+                  feels={weather?.list[week].main.feels_like.toFixed(0) || ""}
+                  icon={weather?.list[week].weather[0].icon || ""}
                 />
               ))}
             </div>
             <HighlightWrapper>
               <HighlightCard
                 title="Sunrise & Sunset ⛅"
+                body=""
+                unit=""
                 body2={
                   <h4>
-                    🌄 {getSunrise(weather.city.sunrise, weather.city.timezone)}
+                    🌄
+                    {getSunrise(
+                      weather?.city?.sunrise || 0,
+                      weather?.city?.timezone || 0
+                    )}
                   </h4>
                 }
                 body3={
                   <h4>
-                    🌇 {getSunset(weather.city.sunset, weather.city.timezone)}
+                    🌇
+                    {getSunset(
+                      weather?.city?.sunset || 0,
+                      weather?.city?.timezone || 0
+                    )}
                   </h4>
                 }
               />
 
               <HighlightCard
                 title="Humidity 💧"
-                body={weather.list[2].main.humidity}
+                body={weather?.list[2]?.main.humidity || 0}
+                body2=""
+                body3=""
                 unit="%"
               />
 
               <HighlightCard
                 title="Wind Speed 🪁"
-                body={weather.list[2].wind.speed.toFixed(0) * 3.6}
+                body={
+                  weather?.list[2]
+                    ? weather.list[2].wind.speed?.toFixed(0) * 3.6
+                    : ""
+                }
                 unit="KM/h"
+                body2=""
+                body3=""
               />
 
               <HighlightCard
                 title="Pressure 🌊"
-                body={weather.list[2].main.pressure}
+                body={weather?.list[2].main.pressure || 0}
+                body2=""
+                body3=""
                 unit="hPa"
               />
 
               <HighlightCard
                 title="Visibility 🕶"
-                body={weather.list[2].visibility / 1000}
+                body={weather?.list[2]?.visibility / 1000}
                 unit="KM"
+                body2=""
+                body3=""
               />
               <HighlightCard
                 title="API From 🗺"
+                body=""
+                unit=""
+                body3=""
                 body2={
                   <div className="">
                     <a
