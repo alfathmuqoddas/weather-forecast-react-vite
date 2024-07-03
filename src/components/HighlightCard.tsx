@@ -1,6 +1,18 @@
-import React from "react";
+interface HighlightCardProps {
+  title: string;
+  body: number | string;
+  unit: string;
+  body2: React.ReactNode;
+  body3: React.ReactNode | string;
+}
 
-const HighlightCard = ({ title, body, unit, body2, body3 }) => {
+const HighlightCard: React.FC<HighlightCardProps> = ({
+  title,
+  body,
+  unit,
+  body2,
+  body3,
+}) => {
   return (
     <>
       <div className="col">

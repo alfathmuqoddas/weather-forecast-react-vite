@@ -1,6 +1,8 @@
-import React from "react";
+interface RightSideProps {
+  children: React.ReactNode;
+}
 
-const RightSide = ({ children }) => {
+const RightSide: React.FC<RightSideProps> = ({ children }) => {
   return (
     <div className="col-md-8">
       <div

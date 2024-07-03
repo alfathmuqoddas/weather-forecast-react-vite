@@ -1,6 +1,11 @@
-import React from "react";
+interface DailyCardProps {
+  day: string;
+  temp: string;
+  feels: string;
+  icon: string;
+}
 
-const DailyCard = ({ day, temp, feels, icon }) => {
+const DailyCard: React.FC<DailyCardProps> = ({ day, temp, feels, icon }) => {
   return (
     <div className="col">
       <div

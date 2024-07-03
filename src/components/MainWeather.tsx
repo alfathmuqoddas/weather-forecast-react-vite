@@ -1,6 +1,17 @@
-import React from "react";
+interface MainWeatherProps {
+  bigIcon: string;
+  mainTemp: string;
+  mainDate: string;
+  feels: string;
+  min: string;
+  max: string;
+  mainDesc: string;
+  humidity: string | number;
+  city: string;
+  country: string;
+}
 
-const MainWeather = ({
+const MainWeather: React.FC<MainWeatherProps> = ({
   bigIcon,
   mainTemp,
   mainDate,
