@@ -10,56 +10,7 @@ import "./components/mystyle.css";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-
-interface IWeatherData {
-  city: ICityObjectData;
-  cnt: number;
-  cod: string;
-  list: IListWeatherObject[];
-  message: number;
-}
-
-interface ICityObjectData {
-  coord: { lat: number; lon: number };
-  country: string;
-  id: number;
-  name: string;
-  population: number;
-  sunrise: number;
-  sunset: number;
-  timezone: number;
-}
-
-interface IListWeatherObject {
-  clouds: { all: number };
-  dt: number;
-  dt_txt: string;
-  main: IMainWeather;
-  pop: number;
-  sys: { pod: string };
-  visibility: number;
-  weather: IWeatherInnerObject[];
-  wind: { speed: number; deg: number; gust: number };
-}
-
-interface IMainWeather {
-  feels_like: number;
-  grnd_level: number;
-  humidity: number;
-  pressure: number;
-  sea_level: number;
-  temp: number;
-  temp_kf: number;
-  temp_max: number;
-  temp_min: number;
-}
-
-interface IWeatherInnerObject {
-  id: number;
-  main: string;
-  description: string;
-  icon: string;
-}
+import { IWeatherData } from "./types/weatherApi";
 
 export default function App() {
   const [weather, setWeather] = useState<IWeatherData | null>(null);
@@ -228,11 +179,7 @@ export default function App() {
 
               <HighlightCard
                 title="Wind Speed 🪁"
-                body={
-                  weather?.list[2]
-                    ? weather.list[2].wind.speed?.toFixed(0) * 3.6
-                    : ""
-                }
+                body={Math.round((weather?.list[2].wind.speed ?? 0) * 3.6)}
                 unit="KM/h"
                 body2=""
                 body3=""
@@ -248,7 +195,7 @@ export default function App() {
 
               <HighlightCard
                 title="Visibility 🕶"
-                body={weather?.list[2]?.visibility / 1000}
+                body={(weather?.list[2].visibility ?? 0) / 1000}
                 unit="KM"
                 body2=""
                 body3=""

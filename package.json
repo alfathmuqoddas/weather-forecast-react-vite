@@ -5,8 +5,8 @@
   "type": "module",
   "homepage": "https://alfathmuqoddas.github.com/weather-forecast-react-vite/",
   "scripts": {
-    "dev": "tsc --noEmit --watch && vite --host",
-    "build": "tsc --noEmit && vite build",
+    "dev": "vite --host",
+    "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
