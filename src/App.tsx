@@ -34,7 +34,7 @@ export default function App() {
 
   useEffect(() => {
     getWeather();
-  }, []);
+  });
 
   const getWeather = async () => {
     try {

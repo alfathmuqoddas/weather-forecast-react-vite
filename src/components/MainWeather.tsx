@@ -14,7 +14,7 @@ interface MainWeatherProps {
 const MainWeather: React.FC<MainWeatherProps> = ({
   bigIcon,
   mainTemp,
-  mainDate,
+  // mainDate,
   feels,
   min,
   max,
