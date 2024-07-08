@@ -1,11 +1,7 @@
 import React from "react";
 //import "./mystyle.css";
 
-interface WeatherCardProps {
-  children: React.ReactNode; // Or a more specific component type
-}
-
-const WeatherCard: React.FC<WeatherCardProps> = ({ children }) => {
+const WeatherCard = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="container">
       <div className="card blur-effect" style={{ borderRadius: "28px" }}>

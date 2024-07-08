@@ -1,11 +1,14 @@
-interface DailyCardProps {
+const DailyCard = ({
+  day,
+  temp,
+  feels,
+  icon,
+}: {
   day: string;
   temp: string;
   feels: string;
   icon: string;
-}
-
-const DailyCard: React.FC<DailyCardProps> = ({ day, temp, feels, icon }) => {
+}) => {
   return (
     <div className="col">
       <div

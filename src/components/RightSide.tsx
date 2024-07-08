@@ -1,8 +1,4 @@
-interface RightSideProps {
-  children: React.ReactNode;
-}
-
-const RightSide: React.FC<RightSideProps> = ({ children }) => {
+const RightSide = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="col-md-8">
       <div
