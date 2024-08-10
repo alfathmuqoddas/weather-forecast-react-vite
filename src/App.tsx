@@ -93,7 +93,7 @@ export default function App() {
               style={{ width: "100%" }}
               onSubmit={(e) => {
                 e.preventDefault();
-                navigate(`/${query}`);
+                navigate(`${import.meta.env.BASE_URL}${query}`);
                 console.log(weather);
               }}
             >
