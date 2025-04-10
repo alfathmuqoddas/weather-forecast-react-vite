@@ -55,8 +55,8 @@ const MainWeather: React.FC<MainWeatherProps> = ({
         />
       </figure>
       <div>
-        <div className="text-5xl font-light">{mainTemp} °C</div>
-        <div className="text-3xl font-light">{mainDesc}</div>
+        <div className="text-7xl font-light">{mainTemp} °C</div>
+        <div className="text-5xl font-light">{mainDesc}</div>
       </div>
       <div className="">
         <p className="m-0">🌡 Feels Like {feels} °C</p>
