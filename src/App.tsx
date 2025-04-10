@@ -81,32 +81,6 @@ export default function App() {
     >
       <WeatherCard>
         <LeftSide>
-          <div className="mt-0">
-            <form className="w-full" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                className="form-control"
-                name="location"
-                id="location"
-                // value={query}
-                placeholder="Search City"
-                style={{
-                  borderTopLeftRadius: "50rem",
-                  borderBottomLeftRadius: "50rem",
-                }}
-                required
-              />
-              <input
-                type="submit"
-                className="bg-blue-500 px-3 py-2"
-                value="🔍"
-                style={{
-                  borderTopRightRadius: "50rem",
-                  borderBottomRightRadius: "50rem",
-                }}
-              />
-            </form>
-          </div>
           <MainWeather
             mainDate=""
             bigIcon={weather?.list[2].weather[0].icon || ""}
@@ -118,10 +92,11 @@ export default function App() {
             humidity={weather?.list[2].main.humidity || ""}
             city={weather?.city.name || ""}
             country={weather?.city.country || ""}
+            handleSubmitLocation={handleSubmit}
           />
         </LeftSide>
         <RightSide>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-2 pb-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 pb-4">
             {weeks.map((week, index) => (
               <DailyCard
                 key={index}
@@ -138,22 +113,22 @@ export default function App() {
               body=""
               unit=""
               body2={
-                <h4>
+                <p className="font-bold">
                   🌄
                   {getSunrise(
                     weather?.city?.sunrise || 0,
                     weather?.city?.timezone || 0
                   )}
-                </h4>
+                </p>
               }
               body3={
-                <h4>
+                <p className="font-bold">
                   🌇
                   {getSunset(
                     weather?.city?.sunset || 0,
                     weather?.city?.timezone || 0
                   )}
-                </h4>
+                </p>
               }
             />
 
@@ -198,12 +173,12 @@ export default function App() {
                   <a
                     href="https://openweathermap.org"
                     target="_blank"
-                    className="text-decoration-none"
+                    className="hover:underline"
                   >
                     OpenWeatherMap
                   </a>
                   <button
-                    className="btn btn-primary mt-2 rounded-pill"
+                    className="mt-2 bg-blue-500 rounded-full px-2 py-1 text-white hover:cursor-pointer"
                     onClick={handleRandomizeClick}
                   >
                     Randomize Background

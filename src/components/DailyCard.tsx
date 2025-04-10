@@ -11,7 +11,7 @@ const DailyCard = ({
 }) => {
   console.log("render DailyCard");
   return (
-    <div className="p-2 text-center shadow-sm rounded-[28px]">
+    <div className="p-2 text-center shadow-sm hover:shadow-md rounded-[28px]">
       <p>{day}</p>
       <figure className="w-full">
         <img
