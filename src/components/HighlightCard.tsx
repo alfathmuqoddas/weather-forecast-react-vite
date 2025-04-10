@@ -16,14 +16,11 @@ const HighlightCard: React.FC<HighlightCardProps> = ({
   console.log("render HighlightCard");
   return (
     <>
-      <div className="col">
-        <div
-          className="p-2 border bg-light text-center shadow-sm border-0"
-          style={{ minHeight: "150px", borderRadius: "28px" }}
-        >
+      <div className="flex flex-col text-center">
+        <div className="p-2 text-center shadow-sm min-h-[150px] rounded-[28px]">
           <p>{title}</p>
           <div>
-            <span className="display-3">{body}</span> {unit}
+            <span className="text-5xl">{body}</span> {unit}
           </div>
           <div>{body2}</div>
           <div>{body3}</div>

@@ -20,7 +20,6 @@ import useStore from "./store/useStore";
 export default function App() {
   const { query, setQuery, backgroundImageUrl, setRandomBackground } =
     useStore();
-  const link = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=4018b500122ee53a2b2b0ccc505a5ae4&units=metric`;
 
   function handleRandomizeClick() {
     setRandomBackground();
@@ -82,12 +81,8 @@ export default function App() {
     >
       <WeatherCard>
         <LeftSide>
-          <div className="container mt-0">
-            <form
-              className="input-group"
-              style={{ width: "100%" }}
-              onSubmit={handleSubmit}
-            >
+          <div className="mt-0">
+            <form className="w-full" onSubmit={handleSubmit}>
               <input
                 type="text"
                 className="form-control"
@@ -103,7 +98,7 @@ export default function App() {
               />
               <input
                 type="submit"
-                className="btn btn-primary px-3"
+                className="bg-blue-500 px-3 py-2"
                 value="🔍"
                 style={{
                   borderTopRightRadius: "50rem",
@@ -126,7 +121,7 @@ export default function App() {
           />
         </LeftSide>
         <RightSide>
-          <div className="row row-cols-2 row-cols-md-5 text-dark g-2 pb-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-2 pb-4">
             {weeks.map((week, index) => (
               <DailyCard
                 key={index}
