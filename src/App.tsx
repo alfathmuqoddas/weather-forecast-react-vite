@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import MainWeather from "./components/MainWeather";
 import LeftSide from "./components/LeftSide";
 import RightSide from "./components/RightSide";
@@ -11,52 +11,38 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { IWeatherData } from "./types/weatherApi";
-import { useLoaderData, useNavigate } from "react-router-dom";
+// import { useLoaderData, useNavigate } from "react-router-dom";
+// import { useComputed, useSignal } from "@preact/signals-react";
+import useSWR from "swr";
+import fetcher from "./utils/fetcher";
+import useStore from "./store/useStore";
 
 export default function App() {
-  // const [weather, setWeather] = useState<IWeatherData | null>(null);
-  // const [loading, setLoading] = useState<boolean>(false);
-  const [query, setQuery] = useState<string>("Jakarta");
-  const [backgroundImageUrl, setBackgroundImageUrl] = useState<string>(
-    `https://picsum.photos/seed/${generateRandomString()}/1280/720`
-  );
-
-  function generateRandomString(): string {
-    // Generate a random string of 10 characters
-    const result = Math.random().toString(36).slice(2, 7);
-    return result;
-  }
+  const { query, setQuery, backgroundImageUrl, setRandomBackground } =
+    useStore();
+  const link = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=4018b500122ee53a2b2b0ccc505a5ae4&units=metric`;
 
   function handleRandomizeClick() {
-    setBackgroundImageUrl(
-      `https://picsum.photos/seed/${generateRandomString()}/1280/720`
-    );
+    setRandomBackground();
   }
 
-  const navigate = useNavigate();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    setQuery((formData.get("location") as string) || "");
+  };
 
-  // useEffect(() => {
-  //   getWeather();
-  // });
+  const {
+    data: weather,
+    error,
+    isLoading,
+  } = useSWR<IWeatherData>(
+    `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=4018b500122ee53a2b2b0ccc505a5ae4&units=metric`,
+    fetcher
+  );
 
-  // const getWeather = async () => {
-  //   try {
-  //     const url: string = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=4018b500122ee53a2b2b0ccc505a5ae4&units=metric`;
-  //     const res = await fetch(url);
-  //     const resJson = (await res.json()) as IWeatherData;
-  //     console.log(resJson);
-  //     if (resJson.list) {
-  //       setWeather(resJson);
-  //       setLoading(false);
-  //     } else {
-  //       alert("City not exist");
-  //     }
-  //   } catch (error) {
-  //     alert(error);
-  //   }
-  // };
-
-  const weather = useLoaderData() as IWeatherData;
+  console.log({ weather });
 
   const weeks: number[] = [8, 16, 24, 32, 39];
 
@@ -70,6 +56,15 @@ export default function App() {
   const getSunset = (sunset: number, timezone: number) => {
     return dayjs.unix(sunset).utc().add(timezone, "second").format("HH:mm");
   };
+
+  if (error) {
+    if (error.status === 404) {
+      return <div>Resource not found.</div>;
+    }
+    return <div>Failed to load.</div>;
+  }
+
+  if (isLoading) return <>Loading...</>;
 
   return (
     <div
@@ -91,17 +86,14 @@ export default function App() {
             <form
               className="input-group"
               style={{ width: "100%" }}
-              onSubmit={(e) => {
-                e.preventDefault();
-                navigate(`${import.meta.env.BASE_URL}${query}`);
-                console.log(weather);
-              }}
+              onSubmit={handleSubmit}
             >
               <input
                 type="text"
                 className="form-control"
-                onChange={(e) => setQuery(e.target.value)}
-                value={query}
+                name="location"
+                id="location"
+                // value={query}
                 placeholder="Search City"
                 style={{
                   borderTopLeftRadius: "50rem",

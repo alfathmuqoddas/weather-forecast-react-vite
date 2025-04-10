@@ -1,4 +1,5 @@
 const RightSide = ({ children }: { children: React.ReactNode }) => {
+  console.log("render RightSide");
   return (
     <div className="col-md-8">
       <div

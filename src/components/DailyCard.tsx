@@ -9,6 +9,7 @@ const DailyCard = ({
   feels: string;
   icon: string;
 }) => {
+  console.log("render DailyCard");
   return (
     <div className="col">
       <div

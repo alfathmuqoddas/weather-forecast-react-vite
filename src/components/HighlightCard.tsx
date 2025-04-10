@@ -13,6 +13,7 @@ const HighlightCard: React.FC<HighlightCardProps> = ({
   body2,
   body3,
 }) => {
+  console.log("render HighlightCard");
   return (
     <>
       <div className="col">

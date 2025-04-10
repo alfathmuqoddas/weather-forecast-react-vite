@@ -23,6 +23,7 @@ const MainWeather: React.FC<MainWeatherProps> = ({
   city,
   country,
 }) => {
+  console.log("render MainWeather");
   return (
     <div className="w-100 text-center">
       <img
