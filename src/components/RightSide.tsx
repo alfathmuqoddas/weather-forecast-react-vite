@@ -1,10 +1,8 @@
 const RightSide = ({ children }: { children: React.ReactNode }) => {
+  console.log("render RightSide");
   return (
-    <div className="col-md-8">
-      <div
-        className="card-body h-100 bg-light text-light p-4"
-        style={{ borderRadius: "28px" }}
-      >
+    <div className="md:w-4/6">
+      <div className="flex flex-col gap-8 justify-between h-full bg-neutral-50 font-light p-4 rounded-[28px]">
         {children}
       </div>
     </div>

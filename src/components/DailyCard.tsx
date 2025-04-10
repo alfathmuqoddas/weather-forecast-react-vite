@@ -9,23 +9,22 @@ const DailyCard = ({
   feels: string;
   icon: string;
 }) => {
+  console.log("render DailyCard");
   return (
-    <div className="col">
-      <div
-        className="p-2 border bg-light text-center shadow-sm border-0"
-        style={{ borderRadius: "28px" }}
-      >
-        <p>{day}</p>
+    <div className="p-2 text-center bg-white shadow-sm hover:shadow-md rounded-[28px]">
+      <p>{day}</p>
+      <figure className="w-full">
         <img
           src={`https://openweathermap.org/img/wn/${icon}.png`}
           width="50"
           height="50"
           alt="daily-weather-icon"
+          className="mx-auto"
         />
-        <p>
-          {temp}° {feels}°
-        </p>
-      </div>
+      </figure>
+      <p>
+        {temp}° {feels}°
+      </p>
     </div>
   );
 };

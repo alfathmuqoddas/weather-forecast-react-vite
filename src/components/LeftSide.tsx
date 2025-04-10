@@ -1,5 +1,6 @@
 const LeftSide = ({ children }: { children: React.ReactNode }) => {
-  return <div className="col-md-4 p-4">{children}</div>;
+  console.log("render LeftSide");
+  return <div className="md:w-2/6">{children}</div>;
 };
 
 export default LeftSide;
