@@ -29,7 +29,7 @@ A simple and beautiful weather forecast app built with React and Vite.
 ## Screenshots
 
 ![Screenshot 1](./screenshot/app.png)
-![Screenshot 2](./build-size.png)
+![Screenshot 2](./screenshot/build-size.png)
 
 ## License
 
