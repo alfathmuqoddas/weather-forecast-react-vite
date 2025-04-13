@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import { useState } from "react";
 import MainWeather from "./components/MainWeather";
 import LeftSide from "./components/LeftSide";
 import RightSide from "./components/RightSide";
@@ -11,18 +11,18 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { IWeatherData } from "./types/weatherApi";
-// import { useLoaderData, useNavigate } from "react-router-dom";
-// import { useComputed, useSignal } from "@preact/signals-react";
-import useSWR from "swr";
-import fetcher from "./utils/fetcher";
-import useStore from "./store/useStore";
+import useFetch from "./utils/useFetch";
+import generateRandomString from "./utils/generateRandomString";
 
 export default function App() {
-  const { query, setQuery, backgroundImageUrl, setRandomBackground } =
-    useStore();
-
+  const [query, setQuery] = useState("jakarta");
+  const [backgroundImageUrl, setBackgroundImageUrl] = useState(
+    `https://picsum.photos/seed/${generateRandomString()}/1920/1080`
+  );
   function handleRandomizeClick() {
-    setRandomBackground();
+    setBackgroundImageUrl(
+      `https://picsum.photos/seed/${generateRandomString()}/1920/1080`
+    );
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,16 +32,13 @@ export default function App() {
     setQuery((formData.get("location") as string) || "");
   };
 
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=4018b500122ee53a2b2b0ccc505a5ae4&units=metric`;
+
   const {
     data: weather,
+    loading,
     error,
-    isLoading,
-  } = useSWR<IWeatherData>(
-    `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=4018b500122ee53a2b2b0ccc505a5ae4&units=metric`,
-    fetcher
-  );
-
-  console.log({ weather });
+  } = useFetch<IWeatherData>(url, [query]);
 
   const weeks: number[] = [8, 16, 24, 32, 39];
 
@@ -55,13 +52,6 @@ export default function App() {
   const getSunset = (sunset: number, timezone: number) => {
     return dayjs.unix(sunset).utc().add(timezone, "second").format("HH:mm");
   };
-
-  if (error) {
-    if (error.status === 404) {
-      return <div>Resource not found.</div>;
-    }
-    return <div>Failed to load.</div>;
-  }
 
   return (
     <div
@@ -79,7 +69,7 @@ export default function App() {
     >
       {error ? (
         <>Error Please Try Again Later</>
-      ) : isLoading ? (
+      ) : loading ? (
         <>Loading...</>
       ) : (
         <WeatherCard>
