@@ -28,8 +28,8 @@ A simple and beautiful weather forecast app built with React and Vite.
 
 ## Screenshots
 
-![Screenshot 1](https://github.com/alfathmuqoddas/weather-forecast-react-vite/screenshot/app.png)
-![Screenshot 2](https://github.com/alfathmuqoddas/weather-forecast-react-vite/screenshot/build-size.png)
+![Screenshot 1](./screenshot/app.png)
+![Screenshot 2](./build-size.png)
 
 ## License
 
