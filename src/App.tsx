@@ -56,13 +56,6 @@ export default function App() {
     return dayjs.unix(sunset).utc().add(timezone, "second").format("HH:mm");
   };
 
-  if (error) {
-    if (error.status === 404) {
-      return <div>Resource not found.</div>;
-    }
-    return <div>Failed to load.</div>;
-  }
-
   return (
     <div
       style={{
@@ -79,22 +72,42 @@ export default function App() {
     >
       {error ? (
         <>Error Please Try Again Later</>
-      ) : isLoading ? (
-        <>Loading...</>
       ) : (
         <WeatherCard>
           <LeftSide>
             <MainWeather
               mainDate=""
-              bigIcon={weather?.list[2].weather[0].icon || ""}
-              mainTemp={weather?.list[2].main.temp.toFixed(0) || ""}
-              feels={weather?.list[2].main.feels_like.toFixed(0) || ""}
-              min={weather?.list[2].main.temp_min.toFixed(0) || ""}
-              max={weather?.list[2].main.temp_max.toFixed(0) || ""}
-              mainDesc={weather?.list[2].weather[0].description || ""}
-              humidity={weather?.list[2].main.humidity || ""}
-              city={weather?.city.name || ""}
-              country={weather?.city.country || ""}
+              bigIcon={
+                isLoading ? "..." : weather?.list[2]?.weather[0].icon || ""
+              }
+              mainTemp={
+                isLoading ? "..." : weather?.list[2]?.main.temp.toFixed(0) || ""
+              }
+              feels={
+                isLoading
+                  ? "..."
+                  : weather?.list[2]?.main.feels_like.toFixed(0) || ""
+              }
+              min={
+                isLoading
+                  ? "..."
+                  : weather?.list[2]?.main.temp_min.toFixed(0) || ""
+              }
+              max={
+                isLoading
+                  ? "..."
+                  : weather?.list[2]?.main.temp_max.toFixed(0) || ""
+              }
+              mainDesc={
+                isLoading
+                  ? "..."
+                  : weather?.list[2]?.weather[0].description || ""
+              }
+              humidity={
+                isLoading ? "..." : weather?.list[2]?.main.humidity || ""
+              }
+              city={isLoading ? "..." : weather?.city.name || ""}
+              country={isLoading ? "..." : weather?.city.country || ""}
               handleSubmitLocation={handleSubmit}
             />
           </LeftSide>
@@ -137,7 +150,7 @@ export default function App() {
 
               <HighlightCard
                 title="Humidity 💧"
-                body={weather?.list[2]?.main.humidity || 0}
+                body={isLoading ? "..." : weather?.list[2]?.main.humidity || 0}
                 body2=""
                 body3=""
                 unit="%"
