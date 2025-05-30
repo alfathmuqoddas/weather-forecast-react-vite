@@ -13,6 +13,7 @@ import timezone from "dayjs/plugin/timezone";
 import { IWeatherData } from "./types/weatherApi";
 // import { useLoaderData, useNavigate } from "react-router-dom";
 // import { useComputed, useSignal } from "@preact/signals-react";
+import { useCallback } from "react";
 import useSWR from "swr";
 import fetcher from "./utils/fetcher";
 import useStore from "./store/useStore";
@@ -48,13 +49,13 @@ export default function App() {
   dayjs.extend(utc);
   dayjs.extend(timezone);
 
-  const getSunrise = (sunrise: number, timezone: number) => {
+  const getSunrise = useCallback((sunrise: number, timezone: number) => {
     return dayjs.unix(sunrise).utc().add(timezone, "second").format("HH:mm");
-  };
+  }, []);
 
-  const getSunset = (sunset: number, timezone: number) => {
+  const getSunset = useCallback((sunset: number, timezone: number) => {
     return dayjs.unix(sunset).utc().add(timezone, "second").format("HH:mm");
-  };
+  }, []);
 
   return (
     <div

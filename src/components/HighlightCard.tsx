@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 interface HighlightCardProps {
   title: string;
   body: number | string;
@@ -33,4 +35,4 @@ const HighlightCard: React.FC<HighlightCardProps> = ({
   );
 };
 
-export default HighlightCard;
+export default memo(HighlightCard);

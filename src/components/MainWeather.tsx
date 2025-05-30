@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 interface MainWeatherProps {
   bigIcon: string;
   mainTemp: string;
@@ -71,4 +73,4 @@ const MainWeather: React.FC<MainWeatherProps> = ({
   );
 };
 
-export default MainWeather;
+export default memo(MainWeather);

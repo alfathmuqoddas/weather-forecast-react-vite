@@ -11,7 +11,7 @@ interface LocationState {
 const useStore = create<LocationState>((set) => ({
   query: "jakarta",
   backgroundImageUrl: `https://picsum.photos/seed/${generateRandomString()}/1280/720`,
-  setQuery: (query: string) => set((state) => ({ ...state, query })),
+  setQuery: (query: string) => set({ query }),
   setRandomBackground: () => {
     // Action that uses the utility function
     const background = `https://picsum.photos/seed/${generateRandomString()}/1280/720`;

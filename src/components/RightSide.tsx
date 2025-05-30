@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const RightSide = ({ children }: { children: React.ReactNode }) => {
   console.log("render RightSide");
   return (
@@ -9,4 +11,4 @@ const RightSide = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default RightSide;
+export default memo(RightSide);

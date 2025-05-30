@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const HighlightWrapper = ({ children }: { children: React.ReactNode }) => {
   console.log("render HighlightWrapper");
   return (
@@ -7,4 +9,4 @@ const HighlightWrapper = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default HighlightWrapper;
+export default memo(HighlightWrapper);

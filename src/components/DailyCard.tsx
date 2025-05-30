@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const DailyCard = ({
   day,
   temp,
@@ -29,4 +31,4 @@ const DailyCard = ({
   );
 };
 
-export default DailyCard;
+export default memo(DailyCard);

@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const WeatherCard = ({ children }: { children: React.ReactNode }) => {
   console.log("render WeatherCard");
   return (
@@ -7,4 +9,4 @@ const WeatherCard = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default WeatherCard;
+export default memo(WeatherCard);
