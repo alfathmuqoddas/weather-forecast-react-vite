@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/weather-forecast-react-vite/sw.js', { scope: '/weather-forecast-react-vite/' })})}
